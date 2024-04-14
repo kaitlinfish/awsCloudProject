@@ -1,10 +1,6 @@
-//const axios = require('axios');
 
 import axios from 'axios';
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-
-
 
 
 //function that handles file uploads
@@ -49,15 +45,14 @@ function downloadFile() {
             return response.json();
         })
         .then(data => {
-            const fileContent = data.fileContent; // Assuming your API returns the file content
-            const fileInput = document.getElementById('fileInput');
+            const fileContent = data.fileContent; 
+            const fileInput = document.getElementById('fileName');
             fileInput.style.display = 'none';
             const fileContentDiv = document.getElementById('fileContent');
             fileContentDiv.style.display = 'block';
             const textContent = document.getElementById('textContent');
             textContent.value = fileContent;
             console.log('File downloaded successfully:', data);
-            // Handle success response here
         })
         .catch(error => {
             console.error('Error downloading file:', error);
@@ -81,6 +76,7 @@ async function fetchFiles() {
             listItem.textContent = file.fileName;
             // Attach event listener to each file item
             listItem.addEventListener('click', function() {
+
                 // Perform read or read/write action on the clicked file
                 const endpoint = file.permissions === 'read_write' ? 'https://epha0wkn52.execute-api.us-east-1.amazonaws.com/dev' : 'https://lmwni800xi.execute-api.us-east-1.amazonaws.com/dev';
                 fetch(endpoint, {
@@ -89,7 +85,7 @@ async function fetchFiles() {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    // Handle response
+                    console.log('Successfully fetched files')
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -102,36 +98,28 @@ async function fetchFiles() {
     }
 }
 
-
+/*****Event Listener's*/
 
 // event listener for file uploads 
 document.getElementById('uploadButton').addEventListener('click', function() {
-    const fileInput = document.getElementById('fileInput');
+    const fileInput = document.getElementById('fileName');
     const file = fileInput.files[0];
 
     if (!file) {
         alert('Please select a file.');
         return;
     }
-
-    // Perform file upload
     uploadFile(file);
 });
-
-/*****Event Listener's*/
-
 //event listener for file downloads 
 document.getElementById('downloadButton').addEventListener('click', function() {
-    // Code to download file from server or AWS S3
-    const fileContent = 'Sample file content'; // Sample content for demonstration
-    const fileInput = document.getElementById('fileInput');
+    const fileContent = '%fileContent'; 
+    const fileInput = document.getElementById('fileName');
     fileInput.style.display = 'none';
     const fileContentDiv = document.getElementById('fileContent');
     fileContentDiv.style.display = 'block';
     const textContent = document.getElementById('textContent');
     textContent.value = fileContent;
-    
-    //perform file download
      downloadFile();
 });
 
