@@ -1,3 +1,6 @@
+/**Description: Lambda function for read and write permissions */
+
+
 const AWS = require('aws-sdk');
 
 

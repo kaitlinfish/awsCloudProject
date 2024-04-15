@@ -1,3 +1,5 @@
+/**Description: lambda function for file listings */
+
 const AWS = require('aws-sdk');
 
 exports.handler = async (event) => {

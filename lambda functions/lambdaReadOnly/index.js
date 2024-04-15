@@ -1,12 +1,12 @@
+/**Description: Lambda function for handling read only permissions */
 const AWS = require('aws-sdk');
-
 
 exports.handler = async (event) => {
     const s3 = new AWS.S3();
 
     const params = {
         Bucket: 'awsfilestorageproject2024', 
-        Key: event.fileName // Assume fileName is provided in the event
+        Key: event.fileName 
     };
 
     try {
@@ -17,8 +17,8 @@ exports.handler = async (event) => {
         };
     } catch (error) {
         return {
-            statusCode: 500,
-            body: JSON.stringify({ message: 'Failed to download file', error: error })
+            statusCode: 403, // Forbidden status code for read-only access
+            body: JSON.stringify({ message: 'Failed to read file', error: error })
         };
     }
 };

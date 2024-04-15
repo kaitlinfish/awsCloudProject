@@ -1,5 +1,4 @@
-
-
+/**Description: lambda function for file uploads */
 const AWS = require('aws-sdk');
 
 exports.handler = async (event) =>  {

@@ -1,12 +1,14 @@
-const AWS = require('aws-sdk');
+/**Description; Lambda function for file downloads */
 
+
+const AWS = require('aws-sdk');
 
 exports.handler = async (event) => {
     const s3 = new AWS.S3();
 
     const params = {
         Bucket: 'awsfilestorageproject2024', 
-        Key: event.fileName // Assume fileName is provided in the event
+        Key: event.fileName 
     };
 
     try {
